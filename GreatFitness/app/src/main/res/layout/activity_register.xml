@@ -187,7 +187,7 @@
                     android:insetBottom="0dp"
                     android:layout_margin="20dp"
                     android:text="Registrar"
-                    android:id="@+id/registrar"
+                    android:id="@+id/btnRegistrar"
                     style="@style/Widget.MaterialComponents.Button"/>
         </LinearLayout>
 

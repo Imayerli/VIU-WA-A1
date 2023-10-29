@@ -1,5 +1,6 @@
 package com.hgf.greatfitness
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
@@ -23,6 +24,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
         mBinding.addresstxt.onFocusChangeListener = this
         mBinding.emailtxt.onFocusChangeListener = this
         mBinding.passwordtxt.onFocusChangeListener = this
+        mBinding.btnRegistrar.setOnClickListener(this)
     }
 
     private fun validateFullName(): Boolean {
@@ -65,9 +67,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
         mBinding.documentType.apply{
             isErrorEnabled = true
             error = error
-
         }
-
         return error == null
 
     }
@@ -98,12 +98,9 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
             mBinding.address.apply{
                 isErrorEnabled = true
                 error = error
-
             }
         }
-
         return error == null
-
     }
 
     private fun validateEmail(): Boolean {
@@ -145,10 +142,18 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
 
     }
 
+    /**
+     *  Funcion de Onclick
+     */
     override fun onClick(view: View?) {
-        TODO("Not yet implemented")
+        if (view != null && view.id == R.id.btnRegistrarse){
+            navegarHaciaApp(SessionActivity::class.java)
+        }
     }
 
+    /**
+     *  Funcion OnFocusChange
+     */
     override fun onFocusChange(view: View?, hasFocus: Boolean) {
         if (view != null){
             when(view.id){
@@ -226,5 +231,10 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
 
     override fun onKey(view: View?, event: Int, keyEvent: KeyEvent?): Boolean {
         TODO("Not yet implemented")
+    }
+
+    fun navegarHaciaApp(clase:Class<*>){
+        val intent = Intent(this, clase)
+        startActivity(intent)
     }
 }
