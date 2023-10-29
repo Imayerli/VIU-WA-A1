@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_margin="20dp"
     tools:context=".SessionActivity">
 
     <com.google.android.material.card.MaterialCardView
@@ -35,6 +36,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Correo Electronico"
+                    android:id="@+id/emailtxt"
                     android:paddingHorizontal="8dp"
                     android:paddingVertical="12dp"
                     android:inputType="textEmailAddress"/>
@@ -53,18 +55,31 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Contraseña "
+                    android:id="@+id/passwordtxt"
                     android:paddingHorizontal="8dp"
                     android:paddingVertical="12dp"
                     android:inputType="textPassword"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                android:id="@+id/btnIniSesion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:text="Iniciar Sesion"
-                style="@style/Widget.MaterialComponents.Button"/>
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_margin="1dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnRegistrarse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="Registrarse"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_margin="1dp"/>
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
