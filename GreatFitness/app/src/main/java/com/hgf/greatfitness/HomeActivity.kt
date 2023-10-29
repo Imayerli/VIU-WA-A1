@@ -24,19 +24,19 @@ class HomeActivity : AppCompatActivity(){
 
         //Eventos
         btnSalud.setOnClickListener {
-            Log.i("MENU --------- ","LANZAMOS APP IMC")
+            Log.i("MENU --------- ","LANZAMOS SALUD")
             navegarHaciaApp(SaludActivity::class.java)
         }
         btnDieta.setOnClickListener {
-            Log.i("MENU --------- ","LANZAMOS SALUDA APP")
+            Log.i("MENU --------- ","LANZAMOS DIETA")
             navegarHaciaApp(DietaActivity::class.java)
         }
         btnEjercicios.setOnClickListener {
-            Log.i("MENU --------- ","LANZAMOS IMC MEJORADO")
+            Log.i("MENU --------- ","LANZAMOS EJERCICIO")
             navegarHaciaApp(EjercicioActivity::class.java)
         }
         btnVideoRutinas.setOnClickListener {
-            Log.i("MENU --------- ","LANZAMOS CANALES APP")
+            Log.i("MENU --------- ","LANZAMOS RUTINAS")
             navegarHaciaApp(RutinasActivity::class.java)
         }
     }
