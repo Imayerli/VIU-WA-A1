@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.google.gson.Gson
 import com.hgf.greatfitness.data.Api
 import com.hgf.greatfitness.data.InicioSesionRequest
 import com.hgf.greatfitness.data.InicioSesionResponse
@@ -90,12 +91,13 @@ class SessionActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusC
                     }
                     val error = response.errorBody()
                     if (error != null){
-                        alertDialogBuilder.setMessage(error.toString())
+                        var gson = Gson()
+                        var testModel = gson.fromJson(error.string(), InicioSesionResponse::class.java)
+                        alertDialogBuilder.setMessage(testModel.msg)
                         alertDialogBuilder.show()
                     }
                 }
                 override fun onFailure(call: Call<InicioSesionResponse>, t: Throwable) {
-                    /*Toast.makeText(this@SessionActivity,"Error",Toast.LENGTH_LONG).show()*/
                     alertDialogBuilder.setMessage("No se pudo iniciar Sesion Correctamente")
                     alertDialogBuilder.show()
                 }
