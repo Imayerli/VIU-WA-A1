@@ -24,7 +24,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = ActivityRegisterBinding.inflate(LayoutInflater.from(this))
-        setContentView(R.layout.activity_register)
+        setContentView(mBinding.root)
         mBinding.documentTypeTex.onFocusChangeListener = this
         mBinding.documentNumberTex.onFocusChangeListener = this
         mBinding.fullNameTxt.onFocusChangeListener = this
@@ -162,7 +162,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
      *  Funcion de Onclick
      */
     override fun onClick(view: View?) {
-        if (view != null && view.id == R.id.btnRegistrarse){
+        if (view != null && view.id == R.id.btnRegistrarAct){
             registrarUsuario(view)
             //navegarHaciaApp(SessionActivity::class.java)
         }
@@ -178,9 +178,9 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
             , mBinding.fullNameTxt.text.toString()
             , mBinding.lastNametxt.text.toString()
             , mBinding.addresstxt.text.toString()
+            , mBinding.phonetxt.text.toString()
             , mBinding.emailtxt.text.toString()
-            , mBinding.passwordtxt.text.toString()
-            , mBinding.btnRegistrarAct.text.toString())
+            , mBinding.passwordtxt.text.toString())
         val request = Api.build().crearUsuario(usuaRequest)
 
         request.enqueue(object:  retrofit2.Callback<UsuarioResponse> {
@@ -189,6 +189,11 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
                 if (usuarioResponse != null) {
                     messague = usuarioResponse.insertedId.toString()
                     alertDialogBuilder.setMessage("Usuario registrado Exitosamente: "+messague)
+                    alertDialogBuilder.show()
+                }
+                val error = response.errorBody()
+                if (error != null) {
+                    alertDialogBuilder.setMessage("error al registrar")
                     alertDialogBuilder.show()
                 }
             }

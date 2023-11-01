@@ -23,7 +23,7 @@ object Api {
         fun obtenerGeneralidad(@Query("type") limit:String): Call<GeneralidadResponse>
 
 
-        @POST("users")
+        @POST("user")
         fun crearUsuario(@Body body: UsuarioRequest): Call<UsuarioResponse>
 
         @POST("login")

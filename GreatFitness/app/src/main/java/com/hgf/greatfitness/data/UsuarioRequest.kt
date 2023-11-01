@@ -5,9 +5,9 @@ data class UsuarioRequest(
     val doc_number:String,
     val name:String,
     val last_name:String,
-    val email:String,
-    val phone:String,
     val address:String,
+    val phone:String,
+    val email:String,
     val password:String
 )
 
