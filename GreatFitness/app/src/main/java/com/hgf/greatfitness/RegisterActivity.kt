@@ -7,11 +7,19 @@ import android.util.Patterns
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
+import androidx.appcompat.app.AlertDialog
+import com.hgf.greatfitness.data.Api
+import com.hgf.greatfitness.data.UsuarioRequest
+import com.hgf.greatfitness.data.UsuarioResponse
 import com.hgf.greatfitness.databinding.ActivityRegisterBinding
+import org.chromium.base.Callback
+import retrofit2.Call
+import retrofit2.Response
 
 class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusChangeListener, View.OnKeyListener{
 
     private lateinit var mBinding:ActivityRegisterBinding
+    private lateinit var messague:String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +32,15 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
         mBinding.addresstxt.onFocusChangeListener = this
         mBinding.emailtxt.onFocusChangeListener = this
         mBinding.passwordtxt.onFocusChangeListener = this
-        mBinding.btnRegistrar.setOnClickListener(this)
+        mBinding.btnRegistrarAct.setOnClickListener(this)
+
+        init()
+    }
+
+    private fun init(){
+        messague = ""
+
+
     }
 
     private fun validateFullName(): Boolean {
@@ -147,8 +163,47 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
      */
     override fun onClick(view: View?) {
         if (view != null && view.id == R.id.btnRegistrarse){
-            navegarHaciaApp(SessionActivity::class.java)
+            registrarUsuario(view)
+            //navegarHaciaApp(SessionActivity::class.java)
         }
+    }
+
+    /**
+     *  Funcion para registrar un usuario
+     */
+    private fun registrarUsuario(view: View?){
+        val alertDialogBuilder = AlertDialog.Builder(this)
+        val usuaRequest = UsuarioRequest(mBinding.documentTypeTex.text.toString()
+            , mBinding.documentNumberTex.text.toString()
+            , mBinding.fullNameTxt.text.toString()
+            , mBinding.lastNametxt.text.toString()
+            , mBinding.addresstxt.text.toString()
+            , mBinding.emailtxt.text.toString()
+            , mBinding.passwordtxt.text.toString()
+            , mBinding.btnRegistrarAct.text.toString())
+        val request = Api.build().crearUsuario(usuaRequest)
+
+        request.enqueue(object:  retrofit2.Callback<UsuarioResponse> {
+            override fun onResponse( call: Call<UsuarioResponse>,response: Response<UsuarioResponse>) {
+                val usuarioResponse = response.body()
+                if (usuarioResponse != null) {
+                    messague = usuarioResponse.insertedId.toString()
+                    alertDialogBuilder.setMessage("Usuario registrado Exitosamente: "+messague)
+                    alertDialogBuilder.show()
+                }
+            }
+            override fun onFailure(call: Call<UsuarioResponse>, t: Throwable) {
+                println(t.message)
+                messague = "El usuario no se creo correctamente"
+                alertDialogBuilder.setMessage(messague)
+                alertDialogBuilder.show()
+
+
+            }
+
+        })
+
+
     }
 
     /**
@@ -159,7 +214,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
             when(view.id){
                 R.id.documentTypeTex ->{
                     if (hasFocus){
-                        if (mBinding.documentType.isCounterEnabled){
+                        if (mBinding.documentType.isErrorEnabled){
                             mBinding.documentType.isErrorEnabled = false
                         }
                     }else{
@@ -169,7 +224,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
                 }
                 R.id.documentNumberTex ->{
                     if (hasFocus){
-                        if (mBinding.documentNumber.isCounterEnabled){
+                        if (mBinding.documentNumber.isErrorEnabled){
                             mBinding.documentNumber.isErrorEnabled = false
                         }
                     }else{
@@ -178,7 +233,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
                 }
                 R.id.fullNameTxt -> {
                     if (hasFocus){
-                        if (mBinding.fullName.isCounterEnabled){
+                        if (mBinding.fullName.isErrorEnabled){
                             mBinding.fullName.isErrorEnabled = false
                         }
                     }else{
@@ -187,7 +242,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
                 }
                 R.id.lastNametxt -> {
                     if (hasFocus){
-                        if (mBinding.lastName.isCounterEnabled){
+                        if (mBinding.lastName.isErrorEnabled){
                             mBinding.lastName.isErrorEnabled = false
                         }
                     }else{
@@ -197,7 +252,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
                 }
                 R.id.addresstxt -> {
                     if (hasFocus){
-                        if (mBinding.address.isCounterEnabled){
+                        if (mBinding.address.isErrorEnabled){
                             mBinding.address.isErrorEnabled = false
                         }
                     }else{
@@ -206,7 +261,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
                 }
                 R.id.emailtxt -> {
                     if (hasFocus){
-                        if (mBinding.email.isCounterEnabled){
+                        if (mBinding.email.isErrorEnabled){
                             mBinding.email.isErrorEnabled = false
                         }
                     }else{
@@ -216,7 +271,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
                 }
                 R.id.passwordtxt ->{
                     if (hasFocus){
-                        if (mBinding.password.isCounterEnabled){
+                        if (mBinding.password.isErrorEnabled){
                             mBinding.password.isErrorEnabled = false
                         }
                     }else{
@@ -230,7 +285,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
     }
 
     override fun onKey(view: View?, event: Int, keyEvent: KeyEvent?): Boolean {
-        TODO("Not yet implemented")
+        return false
     }
 
     fun navegarHaciaApp(clase:Class<*>){

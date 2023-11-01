@@ -3,14 +3,17 @@ package com.hgf.greatfitness
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.util.Patterns
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Button
-import com.hgf.greatfitness.databinding.ActivityRegisterBinding
+import androidx.appcompat.app.AlertDialog
+import com.hgf.greatfitness.data.Api
+import com.hgf.greatfitness.data.InicioSesionRequest
+import com.hgf.greatfitness.data.InicioSesionResponse
 import com.hgf.greatfitness.databinding.ActivitySessionBinding
+import retrofit2.Call
+import retrofit2.Response
 
 class SessionActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusChangeListener, View.OnKeyListener{
     private lateinit var mBinding:ActivitySessionBinding
@@ -27,6 +30,7 @@ class SessionActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusC
     }
 
     private fun validateEmail(): Boolean {
+
         var error:String? = null
         val value: String = mBinding.emailtxt.text.toString()
         if (value.isEmpty()){
@@ -65,14 +69,38 @@ class SessionActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusC
 
     }
     override fun onClick(view: View?) {
+        val alertDialogBuilder = AlertDialog.Builder(this)
         if (view != null && view.id == R.id.btnRegistrarse){
             navegarHaciaApp(RegisterActivity::class.java)
         }
         if (view != null && view.id == R.id.btnIniSesion){
-            navegarHaciaApp(HomeActivity::class.java)
+            val inicioSesionRequest = InicioSesionRequest(
+                mBinding.emailtxt.text.toString()
+                , mBinding.passwordtxt.text.toString())
+            val request = Api.build().iniciarSesion(inicioSesionRequest)
+
+            request.enqueue(object:  retrofit2.Callback<InicioSesionResponse> {
+                override fun onResponse(call: Call<InicioSesionResponse>, response: Response<InicioSesionResponse>) {
+                    val usuarioResponse = response.body()
+                    if (usuarioResponse != null) {
+                        if (usuarioResponse.msg.equals("Bienvenido")){
+                            navegarHaciaApp(HomeActivity::class.java)
+                        }
+                    }
+                }
+                override fun onFailure(call: Call<InicioSesionResponse>, t: Throwable) {
+                    println(t.message)
+                    alertDialogBuilder.setMessage("No se pudo iniciar Sesion Correctamente")
+                    alertDialogBuilder.show()
+                }
+
+            })
+
         }
 
     }
+
+
 
 
     override fun onFocusChange(view: View?, hasFocus: Boolean) {
