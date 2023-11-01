@@ -7,6 +7,7 @@ import android.util.Patterns
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.hgf.greatfitness.data.Api
 import com.hgf.greatfitness.data.InicioSesionRequest
@@ -83,13 +84,18 @@ class SessionActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusC
                 override fun onResponse(call: Call<InicioSesionResponse>, response: Response<InicioSesionResponse>) {
                     val usuarioResponse = response.body()
                     if (usuarioResponse != null) {
-                        if (usuarioResponse.msg.equals("Bienvenido")){
+                            if (usuarioResponse.msg.equals("Bienvenido")){
                             navegarHaciaApp(HomeActivity::class.java)
                         }
                     }
+                    val error = response.errorBody()
+                    if (error != null){
+                        alertDialogBuilder.setMessage(error.toString())
+                        alertDialogBuilder.show()
+                    }
                 }
                 override fun onFailure(call: Call<InicioSesionResponse>, t: Throwable) {
-                    println(t.message)
+                    /*Toast.makeText(this@SessionActivity,"Error",Toast.LENGTH_LONG).show()*/
                     alertDialogBuilder.setMessage("No se pudo iniciar Sesion Correctamente")
                     alertDialogBuilder.show()
                 }
