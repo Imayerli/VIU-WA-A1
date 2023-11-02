@@ -20,7 +20,7 @@ object Api {
 
     interface  RemoteService{
         @GET("general")
-        fun obtenerGeneralidad(@Query("type") limit:String): Call<GeneralidadResponse>
+        fun obtenerGeneralidad(@Query("type") limit:String): Call<List<GeneralidadResponse>>
 
 
         @POST("user")

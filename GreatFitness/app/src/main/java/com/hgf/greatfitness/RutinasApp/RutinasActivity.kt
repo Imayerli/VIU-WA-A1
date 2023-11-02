@@ -12,16 +12,6 @@ class RutinasActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rutinas)
 
-        //Primero recuperar es el boton
-        val btnPulsar = findViewById<Button>(R.id.btnPulsar)
-        val edtTexto = findViewById<EditText>(R.id.edtTexto)
 
-        btnPulsar.setOnClickListener {
-            Log.i("RepositorioCompartido","------ BOTON ${btnPulsar.id} PULSADO ------")
-            //val intent = Intent(this, RecibeSaludoActivity::class.java)
-            //putExtra incluyendo la informacion que queramos pasar
-            //intent.putExtra("texto",edtTexto.text.toString())
-           // startActivity(intent)
-        }
     }
 }
