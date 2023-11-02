@@ -15,7 +15,7 @@
         android:layout_margin="12dp"
         app:cardCornerRadius="0dp"
         app:cardElevation="8dp"
-        app:strokeColor="@color/gin"
+        app:strokeColor="@color/gris"
         app:strokeWidth="0.5dp">
 
         <LinearLayout
