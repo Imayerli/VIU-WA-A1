@@ -43,6 +43,9 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
 
     }
 
+    /**
+     *  Funcion para validacion de campos
+     */
     private fun validateFullName(): Boolean {
         var error:String? = null
         val value: String = mBinding.fullNameTxt.text.toString()
@@ -59,6 +62,9 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
 
     }
 
+    /**
+     *  Funcion para validacion de campos
+     */
     private fun validateLastName(): Boolean {
         var error:String? = null
         val value: String = mBinding.lastNametxt.text.toString()
@@ -74,6 +80,9 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
 
     }
 
+    /**
+     *  Funcion para validacion de campos
+     */
     private fun validateDocumentType(): Boolean {
         var error:String? = null
         val value: String = mBinding.documentTypeTex.text.toString()
@@ -88,6 +97,9 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
 
     }
 
+    /**
+     *  Funcion para validacion de campos
+     */
     private fun validateDocumentNumber(): Boolean {
         var error:String? = null
         val value: String = mBinding.documentNumberTex.text.toString()
@@ -104,6 +116,9 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
 
     }
 
+    /**
+     *  Funcion para validacion de campos
+     */
     private fun validateDireccion(): Boolean {
         var error:String? = null
         val value: String = mBinding.addresstxt.text.toString()
@@ -119,6 +134,9 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
         return error == null
     }
 
+    /**
+     *  Funcion para validacion de campos
+     */
     private fun validateEmail(): Boolean {
         var error:String? = null
         val value: String = mBinding.emailtxt.text.toString()
@@ -138,6 +156,9 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
         return error == null
 
     }
+    /**
+     *  Funcion para validacion de campos
+     */
 
     private fun validatePassword(): Boolean {
         var error:String? = null
@@ -181,9 +202,16 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
             , mBinding.phonetxt.text.toString()
             , mBinding.emailtxt.text.toString()
             , mBinding.passwordtxt.text.toString())
+
+        /**
+         * Peticion para consumir el cliente
+         */
         val request = Api.build().crearUsuario(usuaRequest)
 
         request.enqueue(object:  retrofit2.Callback<UsuarioResponse> {
+            /**
+             * Respuesta Correcta
+             */
             override fun onResponse( call: Call<UsuarioResponse>,response: Response<UsuarioResponse>) {
                 val usuarioResponse = response.body()
                 if (usuarioResponse != null) {
@@ -197,12 +225,14 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
                     alertDialogBuilder.show()
                 }
             }
+            /**
+             * Respuesta incorrecta
+             */
             override fun onFailure(call: Call<UsuarioResponse>, t: Throwable) {
                 println(t.message)
                 messague = "El usuario no se creo correctamente"
                 alertDialogBuilder.setMessage(messague)
                 alertDialogBuilder.show()
-
 
             }
 

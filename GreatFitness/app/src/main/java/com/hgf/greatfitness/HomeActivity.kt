@@ -46,6 +46,10 @@ class HomeActivity : AppCompatActivity(){
         }
 
     }
+
+    /**
+     * Funcion para la navegacion
+     */
     fun navegarHaciaApp(clase:Class<*>){
         val intent = Intent(this, clase)
         startActivity(intent)

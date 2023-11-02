@@ -31,6 +31,9 @@ class SessionActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusC
 
     }
 
+    /**
+     *  Funcion para validacion de campos
+     */
     private fun validateEmail(): Boolean {
 
         var error:String? = null
@@ -52,6 +55,9 @@ class SessionActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusC
 
     }
 
+    /**
+     *  Funcion para validacion de campos
+     */
     private fun validatePassword(): Boolean {
         var error:String? = null
         val value: String = mBinding.passwordtxt.text.toString()
@@ -70,9 +76,12 @@ class SessionActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusC
         return error == null
 
     }
+
+    /**
+     *  Funcion Onclick
+     */
     override fun onClick(view: View?) {
-        navegarHaciaApp(HomeActivity::class.java)
-        /*val alertDialogBuilder = AlertDialog.Builder(this)
+        val alertDialogBuilder = AlertDialog.Builder(this)
         if (view != null && view.id == R.id.btnRegistrarse){
             navegarHaciaApp(RegisterActivity::class.java)
         }
@@ -105,7 +114,7 @@ class SessionActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusC
 
             })
 
-        }*/
+        }
 
     }
 

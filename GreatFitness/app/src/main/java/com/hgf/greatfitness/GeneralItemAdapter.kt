@@ -7,8 +7,14 @@ import com.hgf.greatfitness.databinding.GeneralItemLayoutBinding
 import com.hgf.greatfitness.data.GeneralidadesItemStructure
 
 class GeneralItemAdapter(var items: List<GeneralidadResponse>) :
+    /**
+     * RecyclerView
+     */
     RecyclerView.Adapter<GeneralItemAdapter.ViewHolder>() {
 
+    /**
+     * ViewHolder
+     */
     class ViewHolder(private val binding: GeneralItemLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: GeneralidadResponse) {
             binding.tvTitulo.text = item.title
@@ -17,11 +23,17 @@ class GeneralItemAdapter(var items: List<GeneralidadResponse>) :
         }
     }
 
+    /**
+     * onCreateViewHolder
+     */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = GeneralItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
+    /**
+     * onBindViewHolder
+     */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(items[position])
     }
