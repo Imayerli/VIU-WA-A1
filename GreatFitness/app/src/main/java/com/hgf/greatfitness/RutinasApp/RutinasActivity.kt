@@ -4,8 +4,6 @@ import GeneralItemAdapter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hgf.greatfitness.data.Api
 import com.hgf.greatfitness.data.GeneralidadResponse

@@ -4,14 +4,10 @@ import GeneralItemAdapter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.hgf.greatfitness.R
 import com.hgf.greatfitness.data.Api
 import com.hgf.greatfitness.data.GeneralidadResponse
 import com.hgf.greatfitness.databinding.ActivityDietaBinding
-import com.hgf.greatfitness.databinding.ActivityRutinasBinding
 import retrofit2.Call
 import retrofit2.Response
 
@@ -60,7 +56,6 @@ class DietaActivity : AppCompatActivity() {
             override fun onFailure(call: Call<List<GeneralidadResponse>>, t: Throwable) {
                 // Manejo de fallo en la llamada
                 Log.d("SaludActivity", "Respuesta API error: ${t.message}}") // Log para la respuesta de la API
-
             }
         })
     }
