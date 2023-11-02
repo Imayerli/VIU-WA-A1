@@ -38,11 +38,11 @@ class HomeActivity : AppCompatActivity(){
         }
         btnEjercicios.setOnClickListener {
             Log.i("MENU --------- ","LANZAMOS EJERCICIO")
-            navegarHaciaApp(EjercicioActivity::class.java)
+            navegarHaciaApp(RutinasActivity::class.java)
         }
         btnVideoRutinas.setOnClickListener {
             Log.i("MENU --------- ","LANZAMOS RUTINAS")
-            navegarHaciaApp(RutinasActivity::class.java)
+            navegarHaciaApp(EjercicioActivity::class.java)
         }
 
     }
