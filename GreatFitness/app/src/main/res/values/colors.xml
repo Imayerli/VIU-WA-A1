@@ -2,5 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="gin">#D5DCC7</color>
+    <color name="gin">#8a8783</color>
+    <color name="amarillo">#ffcb00</color>
+    <color name="negro">#000000</color>
 </resources>

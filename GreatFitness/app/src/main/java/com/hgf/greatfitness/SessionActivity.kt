@@ -71,7 +71,8 @@ class SessionActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusC
 
     }
     override fun onClick(view: View?) {
-        val alertDialogBuilder = AlertDialog.Builder(this)
+        navegarHaciaApp(HomeActivity::class.java)
+        /*val alertDialogBuilder = AlertDialog.Builder(this)
         if (view != null && view.id == R.id.btnRegistrarse){
             navegarHaciaApp(RegisterActivity::class.java)
         }
@@ -104,7 +105,7 @@ class SessionActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusC
 
             })
 
-        }
+        }*/
 
     }
 
